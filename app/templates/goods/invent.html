@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br>
+    <p style="color:rgb(255, 255, 255)" align="center">
+        库存盘点
+    </p>
+
+    <p style="color:rgb(255, 255, 255)" align="center">
+        商品 {{ goods.goods.name }}<br>
+        系统库存 {{ goods.real_stock }}<br>
+    </p>
+
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        <p style="color:rgb(255, 255, 255)" align="center">
+            {{ form.stock.label }}
+            &nbsp
+            {{ form.stock(size=32, required=false) }}
+            <br>
+            <span style="color: red;">
+                {{ form.stock.errors[0] }}
+            </span>
+        </p>
+
+        <p align="center">
+            {{ form.submit() }}
+        </p>
+    </form>
+
+{% endblock %}

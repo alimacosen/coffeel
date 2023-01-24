@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br>
+    <p style="color:rgb(255, 255, 255);" align="center">
+        <b>用户评价</b>
+    </p>
+
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        <p style="color:rgb(255, 255, 255);" align="center">
+            {{ form.score.label }}
+            &nbsp
+            {{ form.score(required=false) }}
+            <br>
+            <span style="color: red;">
+                {{ form.score.errors[0] }}
+            </span>
+        </p>
+
+        <p style="color:rgb(255, 255, 255);" align="center">
+            {{ form.content.label }}
+            &nbsp
+            {{ form.content(cols=32, rows=4, required=false) }}
+            <br>
+            <span style="color: red;">
+                {{ form.content.errors[0] }}
+            </span>
+        </p>
+
+        <p style="color:rgb(255, 255, 255);" align="center">
+            {{ form.submit() }}
+        </p>
+    </form>
+
+{% endblock %}

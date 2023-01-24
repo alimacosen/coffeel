@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <p style="color:rgb(255,255,255);" align="center">
+        <img src="{{ goods.cover.url }}" height="400" width="400">
+        <br>
+        {{ goods.goods.name }}
+        <br>
+        {% if g.user.privilege %}
+            <a href="/goods/edit/{{ goods.id }}" style="color:rgb(255,255,255);">
+                编辑
+            </a>
+            &nbsp&nbsp
+            <a href="/goods/delete/{{ goods.id }}" style="color:rgb(255,255,255);">
+                删除
+            </a>
+            &nbsp&nbsp
+            <a href="/goods/invent/{{ goods.id }}" style="color:rgb(255,255,255);">
+                盘点库存
+            </a>
+            &nbsp&nbsp
+        {% endif %}
+        <br>
+        价格  <span style="color: red;">RMB{{ goods.sale_price }}</span>
+        <br>
+        库存: {{ goods.stock }} &nbsp&nbsp&nbsp
+        销量: {{ goods.sales_num }} &nbsp&nbsp&nbsp
+        评分:
+        {% if score %}
+            {{ score }}
+        {% else %}
+            暂无评分
+        {% endif %}
+        <br>
+        品牌: {{ brand_name }} &nbsp&nbsp&nbsp
+        类别: {{ cate_name }}
+        <br>
+        {% if g.user.privilege == 0 %}
+            <a href="/cust/purchase/{{ goods.id }}" style="color:rgb(255,255,255);">
+                [ 购买 ]
+            </a>
+        {% endif %}
+        <br>
+    </p>
+
+    <p style="color:rgb(255,255,255);" align="center">
+        商品描述:&nbsp&nbsp{{ goods.description }}
+        <br>
+        {% for image in goods.images.all() %}
+            <img src="{{ image.url }}" width="500">
+            <br>
+        {% endfor %}
+    </p>
+
+    <p style="color:rgb(255,255,255);">
+        <b>顾客评价:</b>&nbsp
+        {% if result_list %}
+            <ul style="color:rgb(255,255,255);" align="center">
+                {% for result in result_list %}
+                    用户: {{ result.name }}<br>
+                    评分: {{ result.score }}<br>
+                    {% if result.content %}
+                        评价内容: {{ result.content }}
+                        <br>
+                    {% else %}
+                        用户未填写评价内容
+                        <br>
+                    {% endif %}
+                    日期: {{ result.create_time.date() }}
+                    <br>
+                    <br>
+                {% endfor %}
+            </ul>
+        {% else %}
+            暂无评价
+        {% endif %}
+    </p>
+
+{% endblock %}

@@ -1,0 +1,111 @@
+<html>
+    <a href="/index" style="color:rgb(255,255,255);">
+        <img src="/images/web/logo.png" height="70" width="70">
+    </a>
+
+    {% if not g.user.is_authenticated %}
+        <p align="right">
+                <a href="{{ url_for('login', next=next) }}" style="color:rgb(255,255,255);">  {# 登录 #}
+                    <img src="/images/web/login.png" height="40" width="70">
+                </a>
+                &nbsp&nbsp
+                <a href="{{ url_for('register', next=next) }}" style="color:rgb(255,255,255);">  {# 注册 #}
+                    <img src="/images/web/register.png" height="40" width="70">
+                </a>
+            </p>
+    {% endif %}
+
+    <head>
+        <h1 align="center" style="color:white">  {# 标题 #}
+            <i>Welcome to CoffeeL</i> :-)
+        </h1>
+    </head>
+    <hr/>
+
+    <body style="background-image: url(/images/web/background.jpg)">
+        <br/>
+
+        {% if g.user.is_authenticated %}  {# 非游客 #}
+            {% if g.user.privilege %}  {# 管理员 #}
+                <p align="center" style="color:rgb(255,255,255);">
+                    你好! 管理员 <i><b>{{ g.user.id }}</b></i>
+                    <a href="/password/edit" style="color:rgb(255,255,255);">
+                        修改密码
+                    </a>
+                </p>
+
+               <p align="center">
+                   <a href="/admin/orders/1" style="color:rgb(255,255,255);">
+                       我管理的订单
+                   </a>
+                   &nbsp&nbsp
+                   <a href="/admin/orders/0" style="color:rgb(255,255,255);">
+                       待处理的订单
+                   </a>
+                   &nbsp&nbsp
+                   <a href="/goods/add" style="color:rgb(255,255,255);">
+                       添加商品
+                   </a>
+                   &nbsp&nbsp
+                   <a href="/cate/edit" style="color:rgb(255,255,255);">
+                       编辑分类
+                   </a>
+                   &nbsp&nbsp
+                   <a href="/brand/edit" style="color:rgb(255,255,255);">
+                       编辑品牌
+                   </a>
+                   &nbsp&nbsp
+                   <a href="/admin/inventory" style="color:rgb(255,255,255);">
+                       盘点单
+                   </a>
+                   &nbsp&nbsp
+                   {% if g.user.privilege >= 100 %}  {# 超级管理员 #}
+                       <a href="/admin/register" style="color:rgb(255,255,255);">
+                           添加管理员
+                       </a>
+                       &nbsp&nbsp
+                   {% endif %}
+                   <a href="/logout" style="color:rgb(255,255,255);">
+                       退出
+                   </a>
+               </p>
+            {% else %}  {# 普通用户 #}
+                <p align="center" style="color:rgb(255,255,255);">
+                    Hi! 会员 <i><b>{{ g.user.name }}</b></i>
+                    <br/>
+                    <a href="/password/edit" style="color:rgb(255,255,255);">
+                        修改密码
+                    </a>
+                    &nbsp&nbsp
+                    <a href="/cust/edit" style="color:rgb(255,255,255);">
+                        编辑资料
+                    </a>
+                    &nbsp&nbsp
+                    <a href="/cust/orders/4" style="color:rgb(255,255,255);">
+                        我的订单
+                    </a>
+                    &nbsp&nbsp
+                    <a href="/cust/addr" style="color:rgb(255,255,255);">
+                        收货地址
+                    </a>
+                    &nbsp&nbsp
+                    <a href="/logout" style="color:rgb(255,255,255);">
+                        退出账号
+                    </a>
+                </p>
+            {% endif %}
+
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+        <br>
+        <hr>
+        <p align="center">
+            <img src="/images/web/img1.jpg" height="410" width="410">
+            <img src="/images/web/img2.jpg" height="410" width="410">
+            <img src="/images/web/img3.jpg" height="410" width="410">
+            <img src="/images/web/img4.jpg" height="410" width="410">
+        </p>
+    </body>
+</html>

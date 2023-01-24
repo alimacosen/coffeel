@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <br>
+    <p align="center">
+        <a href="/admin/orders/0" style="color:rgb(255,255,255);">
+            待处理
+        </a>
+        &nbsp&nbsp
+        <a href="/admin/orders/1" style="color:rgb(255,255,255);">
+            待发货
+        </a>
+        &nbsp&nbsp
+        <a href="/admin/orders/2" style="color:rgb(255,255,255);">
+            待签收
+        </a>
+        &nbsp&nbsp
+        <a href="/admin/orders/3" style="color:rgb(255,255,255);">
+            待评价
+        </a>
+        &nbsp&nbsp
+        <a href="/admin/orders/4" style="color:rgb(255,255,255);">
+            已完成
+        </a>
+    </p>
+
+    <p style="color:rgb(240, 178, 122);">
+        {{ msg }}
+    </p>
+
+    <ul style="color:rgb(255,255,255);">
+        {% for order in orders %}
+            商品名: {{ order.goods.name }} &nbsp&nbsp&nbsp
+            创建时间: {{ order.create_time }} &nbsp&nbsp&nbsp
+            付款时间: {{ order.pay_time }} &nbsp&nbsp&nbsp
+            数量: {{ order.quantity }} &nbsp&nbsp&nbsp
+            付款金额: RMB{{ order.cost }}&nbsp&nbsp&nbsp
+            <a href="/admin/order/{{ order.id }}" style="color:rgb(255,255,255);">
+                [详情]
+            </a>
+        {% endfor %}
+    </ul>
+{% endblock %}

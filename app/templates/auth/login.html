@@ -1,0 +1,50 @@
+<html>
+    <a href="/index" style="color:rgb(255,255,255);">
+        <img src="/images/web/logo.png" height="70" width="70">  {# 主页返回链接 #}
+    </a>
+
+    <h1 align="center" style="color:white">
+        登录
+    </h1>
+    <hr/>
+
+    <body style="background-image: url(../images/web/background.jpg)">
+        <div style="width:100%; text-align:center">
+            <form action="{{ url_for('login', next=request.args.next) }}" method="post">
+                {{ form.csrf_token }}
+
+                <p style="color:rgb(255,255,255);">
+                    {{ form.user.label }}<br>
+                    {{ form.user(size=32, required=false) }}<br>
+                    <span style="color: red;">{{ form.user.errors[0] }}</span>
+                </p>
+
+                <p style="color:rgb(255,255,255);">
+                    {{ form.password.label }}<br>
+                    {{ form.password(size=32, required=false) }}<br>
+                    <span style="color: red;">{{ form.password.errors[0] }}</span>
+                </p>
+
+                <p style="color:rgb(255,255,255);">
+                    {{ form.submit() }}{{ form.is_admin() }}{{ form.is_admin.label }}
+                </p>
+            </form>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+
+            <a href="/auth/register" style="color:rgb(255,255,255);">
+                注册
+            </a>
+        </div>
+    </body>
+
+
+</html>

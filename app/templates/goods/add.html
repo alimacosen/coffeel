@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br>
+    <form action="" method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <p style="color:rgb(255,255,255);" align="center">
+            {{ form.name.label }}
+            &nbsp
+            {{ form.name(size=32, required=false) }}
+            <br>
+            <span style="color: red;">
+                {{ form.name.errors[0] }}
+            </span>
+        </p>
+
+        <p style="color:rgb(255,255,255);" align="center">
+            {{ form.cate.label }}
+           &nbsp
+            {{ form.cate(required=false) }}
+            <br>
+            <span style="color: red;">
+                {{ form.cate.errors[0] }}
+            </span>
+        </p>
+
+        <p style="color:rgb(255,255,255);" align="center">
+            {{ form.brand.label }}
+            &nbsp
+            {{ form.brand(required=false) }}
+            <br>
+            <span style="color: red;">
+                {{ form.brand.errors[0] }}
+            </span>
+        </p>
+
+        <p style="color:rgb(255,255,255);" align="center">
+            {{ form.purchase_price.label }}
+            &nbsp
+            {{ form.purchase_price(size=32, required=false) }}
+            <br>
+            <span style="color: red;">
+                {{ form.purchase_price.errors[0] }}
+            </span>
+        </p>
+
+        <p style="color:rgb(255,255,255);" align="center">
+            {{ form.sale_price.label }}
+            &nbsp
+            {{ form.sale_price(size=32, required=false) }}
+            <br>
+            <span style="color: red;">
+                {{ form.sale_price.errors[0] }}
+            </span>
+        </p>
+
+        <p style="color:rgb(255,255,255);" align="center">
+            {{ form.stock.label }}
+            &nbsp
+            {{ form.stock(size=32, required=false) }}
+            <br>
+            <span style="color: red;">
+                {{ form.stock.errors[0] }}
+            </span>
+        </p>
+
+        <p style="color:rgb(255,255,255);" align="center">
+            {{ form.description.label }}
+            &nbsp
+            {{ form.description(cols=64, rows=8, required=false) }}
+            <br>
+            <span style="color: red;">
+                {{ form.description.errors[0] }}
+            </span>
+        </p>
+
+        <p style="color:rgb(255,255,255);" align="center">
+            {{ form.cover.label }}
+            &nbsp
+            {{ form.cover(required=false) }}
+            <br>
+            <span style="color: red;">
+                {{ form.cover.errors[0] }}
+            </span>
+        </p>
+
+        <p style="color:rgb(255,255,255);" align="center">
+            {{ form.images.label }}
+            &nbsp
+            {{ form.images(multiple="multiple", required=false) }}
+            <br>
+            <span style="color: red;">
+                {{ form.images.errors[0] }}
+            </span>
+        </p>
+
+        <p style="color:rgb(255,255,255);" align="center">
+            {{ form.submit() }}
+        </p>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+{% endblock %}

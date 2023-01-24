@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <br>
+    <p style="color:rgb(255,255,255);" align="center">
+        用户信息
+    </p>
+
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        <p style="color:rgb(255,255,255);" align="center">
+            {{ form.name.label }}
+            &nbsp
+            {{ form.name(size=32, required=false, value=g.user.name) }}
+            <br>
+            <span style="color: red;">
+                {{ form.name.errors[0] }}
+            </span>
+        </p>
+
+        <p style="color:rgb(255,255,255);" align="center">
+            {{ form.tel.label }}
+            &nbsp
+            {{ form.tel(size=32, required=false, value=g.user.tel) }}
+            <br>
+            <span style="color: red;">
+                {{ form.tel.errors[0] }}
+            </span>
+        </p>
+
+        <p align="center">
+            {{ form.submit() }}
+        </p>
+    </form>
+{% endblock %}

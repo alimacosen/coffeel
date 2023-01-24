@@ -1,0 +1,27 @@
+<html>
+    <h1 align="center" style="color:rgb(255, 255, 255);">
+        需要进行身份验证
+    </h1>
+<body style="background-image: url(/images/web/background.jpg)">
+    <p style="color:rgb(255, 255, 255);" align="center">
+        {{ msg }}
+    </p>
+
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        <p style="color:rgb(255, 255, 255);" align="center">
+            {{ form.password.label }}
+            &nbsp
+            {{ form.password(size=32, required=false) }}
+            <br>
+            <span style="color: red;">
+                {{ form.password.errors[0] }}
+            </span>
+        </p>
+
+        <p align="center">
+            {{ form.submit() }}
+        </p>
+    </form>
+</body>
+</html>

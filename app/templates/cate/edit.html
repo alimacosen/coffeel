@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        <p style="color:rgb(255,255,255);" align="center">
+            <br>
+            {{ form.name.label }}
+            &nbsp
+            {{ form.name(size=32, required=false) }}
+            &nbsp&nbsp
+            <span style="color: red;">
+                {{ form.name.errors[0] }}
+            </span>
+
+            {{ form.submit() }}
+        </p>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <p style="color:rgb(163, 228, 215);">
+        <b><i>商品分类</i></b>
+    </p>
+
+    <ul style="color:rgb(163, 228, 215);">  {# circle颜色 #}
+        {% for category in categories %}
+            <li type="circle">
+                <a href="/cate/index/{{ category.id }}" style="color:rgb(255, 255, 255);">
+                    {{ category.name }}
+                </a>
+                <a href="/cate/delete/{{ category.id }}" style="color:rgb(255, 255, 255);">
+                    [删除]
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

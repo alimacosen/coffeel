@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>  {# 无序列表 内含列表项li #}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <p style="color:rgb(163, 228, 215);">
+        <img src="/images/web/classification1.png" height="30" width="30">
+        <b><i>商品分类</i></b>
+    </p>
+
+    <ul style="color:rgb(163, 228, 215);">
+        {% for category in categories %}
+            <li type="circle">
+                <a href="/cate/index/{{ category.id }}" style="color:rgb(255,255,255);">
+                    {{ category.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <p style="color:rgb(163, 228, 215);">
+        <img src="/images/web/brand.png" height="30" width="30">
+        <b><i>品牌</i></b>
+    </p>
+
+    <ul style="color:rgb(163, 228, 215);"> {# circle颜色 #}
+        {% for brand in brands %}
+            <li type="circle">
+                <a href="/brand/index/{{ brand.id }}" style="color:rgb(255,255,255);">
+                    {{ brand.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

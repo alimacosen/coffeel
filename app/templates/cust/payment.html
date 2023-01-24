@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <p style="color:rgb(255, 255, 255)" align="center">
+        支付页面
+    </p>
+
+    <p style="color:rgb(255, 255, 255)" align="center">
+        应支付 <span style="color: red;">￥{{ order.cost }}</span>
+    </p>
+
+    <p style="color:rgb(255, 255, 255)" align="center">
+        二维码
+        <a href="/cust/paying/{{ order.id }}" style="color:rgb(255, 255, 255)">
+            <button>
+                付款
+            </button>
+        </a>
+    </p>
+{% endblock %}
